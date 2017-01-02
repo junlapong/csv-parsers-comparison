@@ -37,14 +37,22 @@ class UnivocityParser extends AbstractParser {
 		settings.setIgnoreTrailingWhitespaces(false);
 		settings.setSkipEmptyLines(false);
 		settings.setColumnReorderingEnabled(false);
-
+/*
 		settings.setRowProcessor(new AbstractRowProcessor() {
 			@Override
 			public void rowProcessed(String[] row, ParsingContext context) {
 				process(row);
 			}
 		});
-		
+*/
+
+		settings.setProcessor(new AbstractRowProcessor() {
+			@Override
+			public void rowProcessed(String[] row, ParsingContext context) {
+				process(row);
+			}
+		});
+
 		CsvParser parser = new CsvParser(settings);
 		parser.parse(toReader(input));
 	}
